@@ -1,1 +1,2 @@
-# fastcheck_server
+# naked_bot
+Basic messenger bot
