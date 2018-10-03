@@ -49,9 +49,9 @@ def webhook():
                             logger.debug(response_text)
                             return response_text, 200
 
-                        BOT.send_message(sender_id, response_text)
+                        BOT.send_text_message(sender_id, response_text)
                     except Exception:
-                        BOT.send_message(sender_id, 'MISS')
+                        BOT.send_text_message(sender_id, 'MISS')
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
