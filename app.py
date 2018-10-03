@@ -8,7 +8,7 @@ from pymessenger.bot import Bot
 import logging
 
 app = Flask(__name__)
-BOT = Bot(os.environ["PAGE_ACCESS_TOKEN"])
+BOT = Bot(os.environ["ACCESS_TOKEN"])
 logger = logging.getLogger(__name__)
 
 
@@ -82,9 +82,6 @@ def send_message(recipient_id, message_text):
         logger.error(r.status_code)
         logger.error(r.text)
 
-
-def predict(incoming_msg):
-    return "I don't know anything men"
 
 if __name__ == '__main__':
     app.run(debug=True)
