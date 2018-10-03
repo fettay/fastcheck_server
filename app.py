@@ -9,6 +9,7 @@ import logging
 
 app = Flask(__name__)
 BOT = Bot(os.environ["ACCESS_TOKEN"])
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -42,7 +43,13 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     try:
                         message_text = messaging_event["message"]["text"]  # the message's text
-                        BOT.send_message(sender_id, 'ABC')
+                        response_text = 'ABC'
+
+                        if 'DEBUG' in os.environ:
+                            logger.debug(response_text)
+                            return response_text, 200
+
+                        BOT.send_message(sender_id, response_text)
                     except Exception:
                         BOT.send_message(sender_id, 'MISS')
                 if messaging_event.get("delivery"):  # delivery confirmation
@@ -77,6 +84,7 @@ def send_message(recipient_id, message_text):
             "text": message_text
         }
     })
+
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
         logger.error(r.status_code)
@@ -85,4 +93,3 @@ def send_message(recipient_id, message_text):
 
 if __name__ == '__main__':
     app.run(debug=True)
-    #print(predict(raw_input("Enter something")))
