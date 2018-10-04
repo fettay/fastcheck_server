@@ -18,33 +18,36 @@ def get_best_option(options):
         #print("count:", cur_count)
         if (cur_count > max_opt[1]):
             max_opt = (opt, cur_count)
-    log.info("choosed " + max_opt[0] + " as the default")
+    #log.info("choosed " + max_opt[0] + " as the default")
     page = wikipedia.page(max_opt[0])
     return page
 
 def check_fact_in_sentance(keywords, sentance):
     for keyword in keywords:
-        if tokenize(keyword) not in sentance:
+        if tokenize(keyword) not in sentance.split(" "):
             return False
     return True
 
 def search_entity(entity, keywords):
     try:
         search_result = wikipedia.search(entity)
-        log.info(str(search_result))
+        #log.info(str(search_result))
         page = wikipedia.page(search_result[0])
         #print(page.title)
     except wikipedia.exceptions.DisambiguationError as e:
-        log.info("To many options for the search phase: " + entity)
+        #log.info("To many options for the search phase: " + entity)
         page = get_best_option(e.options)
     # found correct page
     sentances = tokenize(page.content).split("\n")
     for sentance in sentances:
         if check_fact_in_sentance(keywords, sentance):
+            #log.info("true sentance is: " + sentance)
             return True
     return False
 
 def test():
+    log.info("France something: " + str(search_entity("France", ["country", "USA"])))
+    log.info("Is Trump a woman? " + str(search_entity("Trump", ["woman"])))
     log.info("Did george clooney won academy awards? " + str(search_entity("George Clooney", ["won", "Academy", "Awards"])))
     log.info("is barack obama black? " + str(search_entity("Barack Obama", ["black"])))
     log.info("bush is a woman? " + str(search_entity("bush", ["woman"])))
