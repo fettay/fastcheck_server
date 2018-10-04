@@ -7,10 +7,6 @@ from logic import answer
 from logger import get_logger
 
 
-#if 'DEBUG' not in os.environ:
-os.system('python -m spacy download en_core_web_sm')
-
-
 app = Flask(__name__)
 BOT = Bot(os.environ["ACCESS_TOKEN"])
 logger = get_logger(__name__)

@@ -2,6 +2,7 @@ import spacy
 from RAKE import Rake
 
 # Load English tokenizer, tagger, parser, NER and word vectors
+spacy.cli.download('en')
 NLP = spacy.load('en_core_web_sm')
 RAKE = Rake('stopwords.txt')
 
