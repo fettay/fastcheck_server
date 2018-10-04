@@ -11,7 +11,7 @@ def find_entities(sentence):
 
     # Find named entities, phrases and concepts
 
-    return [(entity.text, entity.label_) for entity in doc.ents]
+    return [entity.text for entity in doc.ents]
 
 
 def extract_keywords(sentence):
@@ -23,5 +23,5 @@ if __name__ == '__main__':
         sentences = f.read().split('\n')
     for sentence in sentences:
         print(sentence)
-#        print(find_entities(sentence))
+        print(find_entities(sentence))
         print(extract_keywords(sentence))
