@@ -18,7 +18,9 @@ def extract_keywords(sentence):
 
 
 def stemmer(word):
-    return PSTEMMER.stem(word)
+    stemedword = PSTEMMER.stem(word)
+    return stemedword
+
 
 
 def test():

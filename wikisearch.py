@@ -50,7 +50,10 @@ def search_entity(entity, keywords):
     return False
 
 def test():
-    log.info("France something: " + str(search_entity("France", ["country", "USA"])))
+    log.info("Did Iceland run into bankruptcy " + str(search_entity("Iceland", ['run', "into ", "bankruptcy"])))
+    log.info("Data Science is a sexy job " + str(search_entity('Data Science', ['sexy', 'job'])))
+    log.info("Programmer is a sexy job " + str(search_entity('Programmer', ['sexy', 'job'])))
+    log.info("France is a country in the USA: " + str(search_entity("France", ["country", "USA"])))
     log.info("Is Trump a woman? " + str(search_entity("Trump", ["woman"])))
     log.info("Did george clooney won academy awards? " + str(search_entity("George Clooney", ["won", "Academy", "Awards"])))
     log.info("is barack obama black? " + str(search_entity("Barack Obama", ["black"])))
