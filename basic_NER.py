@@ -20,6 +20,7 @@ def extract_keywords(sentence):
 def stemmer(word):
     return PSTEMMER.stem(word)
 
+
 def test():
     with open('test_sentences.txt') as f:
         sentences = f.read().split('\n')

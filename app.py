@@ -60,6 +60,29 @@ def webhook():
     return "ok", 200
   except Exception as e:
     logger.exception(e)
+    return "Error", 400
+
+
+@app.route('/api', methods=['POST'])
+def alexa_api():
+    try:
+        data = request.get_json()
+        logger.debug('Got request from Alexa:')
+        logger.debug(data)
+        text = data["message"]
+
+        try:
+            response_text = answer(text)
+        except Exception as e:
+            logger.exception(e)
+            response_text = "I cannot find any answer to that"
+
+        logger.debug('Question: ' + text)
+        logger.debug('Answer: ' + response_text)
+        return response_text, 200
+
+    except Exception:
+        return "Missed", 400
 
 if __name__ == '__main__':
     app.run(debug=True)
