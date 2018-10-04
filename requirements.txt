@@ -3,3 +3,4 @@ pymessenger
 gunicorn
 wikipedia
 pageviewapi
+nltk

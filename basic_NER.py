@@ -1,18 +1,14 @@
 
-# coding: utf-8
-
-# In[24]:
-
-
-from nltk.chunk import conlltags2tree, tree2conlltags
+import nltk
+from nltk.chunk import tree2conlltags
 from nltk import word_tokenize, pos_tag, ne_chunk
-ne_tree = ne_chunk(pos_tag(word_tokenize(sentence)))
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
 
 
-# In[25]:
-
-
-def extract_ent(sentense):
+def extract_ent(sentence):
     
     list_of_ent = []
     ne_tree = ne_chunk(pos_tag(word_tokenize(sentence)))
@@ -29,9 +25,9 @@ def extract_ent(sentense):
 
 
 def main():
-    sentence = "gershon and John are working at checkpint."
-    print (extract_ent(sentence))
+    sentence = "did george clooney won academy awards?"
+    print(extract_ent(sentence))
     
-if __name__== "__main__":
+if __name__ == "__main__":
     main()
 
