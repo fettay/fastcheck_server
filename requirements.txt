@@ -1,6 +1,6 @@
 Flask
 pymessenger
 gunicorn
-wikipedia
+-e git+https://github.com/goldsmith/Wikipedia#egg=wikipedia
 pageviewapi
 nltk
