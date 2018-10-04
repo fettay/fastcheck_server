@@ -3,7 +3,7 @@ __author__ = 'raphaelfettaya'
 import os
 from flask import Flask, request
 from pymessenger.bot import Bot
-from logic import answer
+from logic import answer, ExtractionError
 from logger import get_logger
 
 
@@ -49,13 +49,16 @@ def webhook():
                             return response_text, 200
 
                         BOT.send_text_message(sender_id, response_text)
+                    except ExtractionError:
+                        BOT.send_text_message(sender_id, "I cannot answer to this")
+
                     except Exception as e:
                         logger.exception(e)
 
                         if 'DEBUG' in os.environ:
                             return 'MISS', 200
 
-                        BOT.send_text_message(sender_id, 'MISS')
+                        BOT.send_text_message(sender_id, "I'm ill a little bit")
 
     return "ok", 200
   except Exception as e:

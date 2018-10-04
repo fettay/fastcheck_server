@@ -8,11 +8,20 @@ class ExtractionError(Exception):
     pass
 
 
+def upper_case(s):
+    """
+    upper case first letter of all words
+    """
+    return " ".join([w[0].upper() + w[1:] for w in s.split(" ")])
+
+
 def answer(sentence):
     keywords = extract_keywords(sentence)
     entities = find_entities(sentence)
     if len(entities) == 0:
-        raise ExtractionError()
+        entities = find_entities(upper_case(sentence))
+        if len(entities) == 0:
+            raise ExtractionError()
     entity = entities[0]
     for s in entity.split():
         if s.lower() in keywords:
