@@ -29,4 +29,7 @@ def send_message(sentence):
 
 
 if __name__ == "__main__":
-    send_message("hello")
+    while True:
+        question = input("Enter a sentence")
+        print()
+        print(send_message(question).text)
