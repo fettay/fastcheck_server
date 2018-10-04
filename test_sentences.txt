@@ -1,5 +1,11 @@
+France is in Africa?
 Did George Clooney received Academy Award?
 Is Jerusalem the capital of Israel?
+Tel Aviv is the capital of Israel?
+Benjamin Netanyahu is the president of the USA?
+Donald Trump is the president of the USA?
+Benjamin Netanyahu is the president of the United States?
+Donald Trump is the president of the United States?
 Did Microsoft run into bankruptcy?
 Did Iceland run into bankruptcy?
 Is Zara a swedish company?
@@ -12,3 +18,6 @@ Is Data Scientist a job ?
 Is Donald Trump a women?
 Is Killian MBappe dead?
 Is Oussama Ben Laden dead?
+Data Science is a sexy job?
+France is a in Africa?
+

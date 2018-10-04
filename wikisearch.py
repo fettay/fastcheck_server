@@ -2,6 +2,7 @@ import wikipedia
 import pageviewapi.period
 from logger import get_logger
 from basic_NER import stemmer
+import re
 
 log = get_logger(__name__)
 
@@ -42,7 +43,7 @@ def search_entity(entity, keywords):
         #log.info("To many options for the search phase: " + entity)
         page = get_best_option(e.options)
     # found correct page
-    sentances = tokenize(page.content).split("\n")
+    sentances = re.split(', | . | \n | \" ', tokenize(page.content))
     for sentance in sentances:
         if check_fact_in_sentance(keywords, sentance):
             #log.info("true sentance is: " + sentance)

@@ -30,11 +30,33 @@ def answer(sentence):
     return str(result)
 
 if __name__ == '__main__':
-    with open('test_sentences.txt') as f:
-        sentences = f.read().split('\n')
-    for sentence in sentences:
-        print(sentence)
+    # with open('test_sentences.txt') as f:
+    #    sentences = f.read().split('\n')
+    # for (sentence, label) in sentences:
+    #     print(sentence)
+    #     try:
+    #         print(answer(sentence))
+    #     except ExtractionError:
+    #         print('Cannot answer')
+
+    from test_set import test_set
+    tp = fp = tn = fn = 0
+    for (sentance, label) in test_set:
+        print(sentance)
         try:
-            print(answer(sentence))
+            ans = answer(sentance)
+            print(ans, "Correct" if ans == str(label) else "Wrong")
+            if ans == str(label):
+                if ans:
+                    tp += 1
+                else:
+                    fp += 1
+            elif label:
+                fn += 1
+            else:
+                tn += 1
+
         except ExtractionError:
             print('Cannot answer')
+
+    print(tp, " ", fp, "\n", fn, " ", tn)
