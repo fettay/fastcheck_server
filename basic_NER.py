@@ -1,10 +1,11 @@
 import spacy
 from RAKE import Rake
+from nltk.stem.porter import PorterStemmer
 
 # Load English tokenizer, tagger, parser, NER and word vectors
-spacy.cli.download('en')
 NLP = spacy.load('en_core_web_sm')
 RAKE = Rake('stopwords.txt')
+PSTEMMER = PorterStemmer()
 
 
 def find_entities(sentence):
@@ -17,6 +18,10 @@ def find_entities(sentence):
 
 def extract_keywords(sentence):
     return [w for s, _ in RAKE.run(sentence) for w in s.split()]
+
+
+def stemmer(word):
+    return PSTEMMER.stem(word)
 
 
 if __name__ == '__main__':

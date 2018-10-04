@@ -1,11 +1,15 @@
 import wikipedia
 import pageviewapi.period
 from logger import get_logger
+from basic_NER import stemmer
 
 log = get_logger(__name__)
 
+
 def tokenize(s):
+    s = " ".join([stemmer(w) for w in s.split(' ')])
     return s.lower() #replace("\n", "").replace(" ", "")
+
 
 def get_best_option(options):
     max_opt = ("", 0)
