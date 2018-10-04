@@ -1,12 +1,14 @@
 __author__ = 'raphaelfettaya'
 
 import os
-import json
-import requests
 from flask import Flask, request
 from pymessenger.bot import Bot
 from logic import answer
 from logger import get_logger
+
+
+#if 'DEBUG' not in os.environ:
+os.system('python -m spacy download en_core_web_sm')
 
 
 app = Flask(__name__)
