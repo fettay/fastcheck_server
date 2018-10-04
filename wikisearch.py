@@ -29,8 +29,10 @@ def check_fact_in_sentance(keywords, sentance):
     return True
 
 def search_entity(entity, keywords):
-    try:    
-        page = wikipedia.page(wikipedia.search(entity)[0])
+    try:
+        search_result = wikipedia.search(entity)
+        log.info(str(search_result))
+        page = wikipedia.page(search_result[0])
         #print(page.title)
     except wikipedia.exceptions.DisambiguationError as e:
         log.info("To many options for the search phase: " + entity)

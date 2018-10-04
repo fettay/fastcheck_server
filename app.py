@@ -30,7 +30,6 @@ def webhook():
     # endpoint for processing incoming messaging events
   try:
     data = request.get_json()
-    logger.debug(data)  # you may not want to log every incoming message in production, but it's good for testing
 
     if data["object"] == "page":
 
@@ -42,14 +41,20 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     try:
                         message_text = messaging_event["message"]["text"]  # the message's text
+                        logger.info('Question: ' + message_text)
                         response_text = answer(message_text)
+                        logger.info('Answer: ' + response_text)
 
                         if 'DEBUG' in os.environ:
-                            logger.debug(response_text)
                             return response_text, 200
 
                         BOT.send_text_message(sender_id, response_text)
-                    except Exception:
+                    except Exception as e:
+                        logger.exception(e)
+
+                        if 'DEBUG' in os.environ:
+                            return 'MISS', 200
+
                         BOT.send_text_message(sender_id, 'MISS')
 
     return "ok", 200
