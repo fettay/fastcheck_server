@@ -8,9 +8,11 @@ from pymessenger.bot import Bot
 from logic import answer
 from logger import get_logger
 
+
 app = Flask(__name__)
 BOT = Bot(os.environ["ACCESS_TOKEN"])
 logger = get_logger(__name__)
+
 
 @app.route('/', methods=['GET'])
 def verify():

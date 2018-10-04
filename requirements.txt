@@ -4,4 +4,4 @@ gunicorn
 -e git+https://github.com/goldsmith/Wikipedia#egg=wikipedia
 pageviewapi
 python-rake
-spacy
+en_core_web_sm
