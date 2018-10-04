@@ -1,33 +1,27 @@
+import spacy
+from RAKE import Rake
 
-import nltk
-from nltk.chunk import tree2conlltags
-from nltk import word_tokenize, pos_tag, ne_chunk
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('maxent_ne_chunker')
-nltk.download('words')
+# Load English tokenizer, tagger, parser, NER and word vectors
+NLP = spacy.load('en_core_web_sm')
+RAKE = Rake('stopwords.txt')
 
 
-def extract_ent(sentence):
-    
-    list_of_ent = []
-    ne_tree = ne_chunk(pos_tag(word_tokenize(sentence)))
-    iob_tagged = tree2conlltags(ne_tree)
-    
-    for ent in iob_tagged:       
-        if ent[1] == 'NN' or ent[1]=='NNP':
-            list_of_ent.append(ent[0].capitalize())
+def find_entities(sentence):
+    doc = NLP(sentence)
 
-    return list_of_ent
+    # Find named entities, phrases and concepts
+
+    return [(entity.text, entity.label_) for entity in doc.ents]
 
 
-# In[26]:
+def extract_keywords(sentence):
+    return [w for s, _ in RAKE.run(sentence) for w in s.split()]
 
 
-def main():
-    sentence = "did george clooney won academy awards?"
-    print(extract_ent(sentence))
-    
-if __name__ == "__main__":
-    main()
-
+if __name__ == '__main__':
+    with open('test_sentences.txt') as f:
+        sentences = f.read().split('\n')
+    for sentence in sentences:
+        print(sentence)
+#        print(find_entities(sentence))
+        print(extract_keywords(sentence))

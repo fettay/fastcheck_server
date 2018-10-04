@@ -3,4 +3,4 @@ pymessenger
 gunicorn
 -e git+https://github.com/goldsmith/Wikipedia#egg=wikipedia
 pageviewapi
-nltk
+python-rake
