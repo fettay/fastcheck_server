@@ -50,6 +50,9 @@ def webhook():
                     BOT.send_text_message(sender_id, "That is a great question, I am checking it")
                     try:
                         message_text = messaging_event["message"]["text"]  # the message's text
+                        if message_text == "True" or message_text == "False":
+                            return "ok", 200
+                    
                         logger.info('Question: ' + message_text)
                         response_text = answer(message_text)
                         logger.info('Answer: ' + response_text)
