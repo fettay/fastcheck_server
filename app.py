@@ -5,6 +5,8 @@ from flask import Flask, request
 from pymessenger.bot import Bot
 from logic import answer, ExtractionError
 from logger import get_logger
+import threading
+
 
 
 app = Flask(__name__)
@@ -24,6 +26,12 @@ def verify():
     return "Hello world", 200
 
 
+def process_request(data):
+    # data = request.get_json()
+    pass
+
+
+
 @app.route('/', methods=['POST'])
 def webhook():
 
@@ -31,14 +39,15 @@ def webhook():
   try:
     data = request.get_json()
 
+    # threading.Thread(target=process_request, args=data).start()
     if data["object"] == "page":
-
         for entry in data["entry"]:
             for messaging_event in entry["messaging"]:
 
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                    BOT.send_text_message(sender_id, "That is a great question, I am checking it")
                     try:
                         message_text = messaging_event["message"]["text"]  # the message's text
                         logger.info('Question: ' + message_text)
@@ -59,6 +68,7 @@ def webhook():
                             return 'MISS', 200
 
                         BOT.send_text_message(sender_id, "I'm ill a little bit")
+
 
     return "ok", 200
   except Exception as e:
