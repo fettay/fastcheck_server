@@ -47,7 +47,6 @@ def webhook():
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
-                    BOT.send_text_message(sender_id, "That is a great question, I am checking it")
                     try:
                         message_text = messaging_event["message"]["text"]  # the message's text
                         if message_text == "True" or message_text == "False":
