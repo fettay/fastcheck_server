@@ -41,7 +41,8 @@ def search_entity(entity, keywords):
         #print(page.title)
     except wikipedia.exceptions.DisambiguationError as e:
         #log.info("To many options for the search phase: " + entity)
-        page = get_best_option(e.options)
+        #page = get_best_option(e.options)
+        page = wikipedia.page(e.options[0])
     # found correct page
     sentances = re.split(', | . | \n | \" ', tokenize(page.content))
     for sentance in sentances:
